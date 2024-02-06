@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+       body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+thead {
+    background-color: #3498db;
+    color: #fff;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+tbody {
+    background-color: #fff;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+       
+    </style>
+    <title>Random Test Questions</title>
+</head>
+<body>
+    <h1>Test Questions Report</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Questions</th>
+                <th>Absorption (%)</th>
+                <th>Assimilation (%)</th>
+                <th>Appreciation (%)</th>
+                <th>Application (%)</th>
+            </tr>
+        </thead>
+        <tbody id="questionTableBody"></tbody>
+    </table>
+     
+     <h1>Result table</h1>
+    <table class="table table-bordered w-50 h-50">
+  <thead>
+    <tr>
+      <th id="a" scope="col">Sl No</th>
+       <!-- <th id="a" scope="col">A4 Quotient</th>  -->
+      <th id="a" scope="col">Results (of 10)</th>
+      <th id="a" scope="col">Percentage(%)</th>
+    </tr>
+  </thead>
+   
+    <tbody>
+    <tr>
+      <th scope="row">1</th>
+            <!-- <td>Absorption</td> -->
+      <td>
+      	<span id="res1"></span>
+      	<span id="grade1"></span> 
+      </td>
+       <td id="t1"></td>
+    </tr>
+     </tbody>
+     </table>
+
+    <script>
+        // Function to generate a random percentage between 0 and max
+
+        // Function to generate the test questions and percentages
+function generateTest() {
+  const questionTableBody = document.getElementById('questionTableBody');
+
+  for (let i = 1; i <= 10; i++) {
+    const ab = JSON.parse(localStorage.getItem(`ab${i}`)); // Parse the stored value
+
+   /*  if (ab) {  */// Check if 'ab' is not null or undefined
+      const row = `<tr>
+                      <td>Question ${i}</td>
+                      <td>${ab[0]/10*100}</td>
+                      <td>${ab[1]/10*100}</td>
+                      <td>${ab[2]/10*100}</td>
+                      <td>${ab[3]/10*100}</td>
+                   </tr>`;
+
+      questionTableBody.innerHTML += row;
+    /* } */
+  }
+}
+
+
+        // Call the function to generate the test when the page loads
+        generateTest();
+        var ans1=localStorage.getItem("score1")
+        var h1 = document.getElementById('res1');
+	    var g1 = document.getElementById("grade1");
+	    
+	    if (ans1 == 10) {
+			h1.textContent = `${ans1}/10`;
+			g1.innerHTML = "excellent"
+		} else if (ans1 >=8 ) {
+			h1.textContent = `${ans1}/10`;
+			g1.innerHTML = "very good"
+		} else if (ans1 >= 6) {
+			h1.textContent = `${ans1}/10`;
+			g1.innerHTML = " good"
+		} else if (ans1 >= 3) {
+			h1.textContent = `${ans1}/10`;
+			g1.innerHTML = "Average"
+		} else {
+			h1.textContent = `${ans1}/10`;
+			g1.innerHTML = "fail"
+		}
+	    
+	    
+	    
+	    var p1 = (ans1 / 10) * 100;
+	    var t1 = document.getElementById('t1');
+	    t1.textContent = `${p1}%`;
+        
+ 
+	    
+            
+        
+    </script>
+</body>
+</html>
+
+
+
+ 

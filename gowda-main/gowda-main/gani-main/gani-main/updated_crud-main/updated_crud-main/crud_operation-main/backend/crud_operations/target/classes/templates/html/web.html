@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Quiz</title>
+  <!-- <link rel="stylesheet" href="./web.css"> -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: powderblue;
+      font-family: 'Roboto Slab', serif;
+     
+    }
+
+    .quiz-container {
+      max-width: 600px;
+      margin: 0 auto;
+      margin-top: -100px;
+    }
+
+    .question {
+      margin-bottom: 10px;
+    }
+
+    .options {
+      margin-bottom: 20px;
+    }
+
+    .result {
+      font-weight: bold;
+    }
+
+    .section-1 {
+      border: 1px solid black;
+      height: 220px;
+      width: 640px;
+      padding-left: 20px;
+      border-radius: 12px;
+    }
+
+    .quiz-navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .submit-btn {
+      display: none;
+      width:90px;
+    }
+
+    .time {
+      background-color: white;
+      width: 130px;
+    }
+    
+    .btn-danger:hover{
+    	background-color:green;
+    }
+    #next{
+    margin-left:px;
+    }
+    #qtn-submit{
+      margin-left:40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="time">
+    <h2></h2>
+    <p id="timer"></p>
+</div>
+<div class="time">
+    <h2>Timer:</h2>
+    <p id="timer"></p>
+    <div id="questionTimer">Time Left: 60s</div> <!-- Timer for each question -->
+</div>
+
+<video id="videoCam" height="200px"></video>
+   <br/><br/>
+   
+  </div>
+  
+  <div class="quiz-container">
+    <div class="quiz-container-sub">
+      <div class='s1'>
+        <h1>SECTION-1</h1>
+        <form id="quizForm" onsubmit="return false;">
+          <div class="section-1">
+            <div class="question" data-question-index="0">
+              <p>1. What is the primary purpose of the "viewport" meta tag in HTML for mobile 
+                    web development?</p>
+              <div class="options">
+                <label><input type="radio" name="q1" value="a"> a) To set the font size of the webpage</label><br>
+                <label><input type="radio" name="q1" value="b"> b) To control the layout viewport and scaling on mobile devices</label><br>
+                <label><input type="radio" name="q1" value="c"> c) To define the background color of the webpage</label><br>
+              <label>  <input type="radio" name="q1" value="d"> d)  To specify the character encoding of the document</label><br>
+              </div>
+            </div>
+
+            <!-- Add more questions -->
+            <div class="question" data-question-index="1">
+              <p>2. How does the use of a CSS preprocessor like Sass or Less enhance the development process in 
+                    web projects?</p>
+              <div class="options">
+                <label><input type="radio" name="q2" value="a"> a) It adds complexity to the styling process</label><br>
+                <label><input type="radio" name="q2" value="b"> b) It simplifies the writing of CSS by introducing variables and nested rules</label><br>
+                <label><input type="radio" name="q2" value="c"> c) It slows down the rendering of webpages</label><br>
+                <label><input type="radio" name="q2" value="d"> d) It is irrelevant to front-end development</label><br>
+              </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question" data-question-index="2">
+              <p>3.  How does the use of a CSS framework like Bootstrap contribute to web development projects?</p>
+              <div class="options">
+                <label><input type="radio" name="q3" value="a"> a) It hinders the customization of website styles</label><br>
+                <label><input type="radio" name="q3" value="b"> b) It provides a set of pre-designed UI components and a responsive grid system</label><br>
+                <label><input type="radio" name="q3" value="c"> c) It increases the complexity of HTML markup</label><br>
+                <label><input type="radio" name="q3" value="d"> d) It is only relevant to server-side programming</label><br>
+              </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question" data-question-index="3">
+              <p>4.What role does the "alt" attribute play in images for web accessibility?</p>
+              <div class="options">
+                <label><input type="radio" name="q4" value="a"> a) It defines the alignment of the image on the page</label><br>
+                <label><input type="radio" name="q4" value="b"> b) It specifies the image source URL</label><br>
+                <label><input type="radio" name="q4" value="c"> c) It provides alternative text for the image, aiding users with visual 
+                                                                   impairments</label><br>
+                <label><input type="radio" name="q4" value="d"> d) It is used for adding visual effects to images</label><br>
+              </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question" data-question-index="4">
+              <p>5.What is the purpose of the "viewport" property in CSS for responsive web design?</p>
+              <div class="options">
+                <label><input type="radio" name="q5" value="a"> a) It controls the visibility of elements on the page</label><br>
+                <label><input type="radio" name="q5" value="b"> b) It sets the font size for the entire document</label><br>
+                <label><input type="radio" name="q5" value="c"> c) It adjusts the layout based on the device's screen size</label><br>
+                <label><input type="radio" name="q5" value="d"> d)  It specifies the order of elements in the HTML document</label><br>
+              </div>
+            </div>
+
+            <!-- Question 6 -->
+            <!--<h1>SECTION-2 Assimilation</h1> -->
+            <div class="question" data-question-index="5">
+              <p>6. What role does the concept of "Microservices" play in modern web development 
+                    architecture?</p>
+              <div class="options">
+                <label><input type="radio" name="q6" value="a"> a) It encourages the use of a monolithic approach</label><br>
+                <label><input type="radio" name="q6" value="b"> b) It advocates for creating small, independent, and scalable services</label><br>
+                <label><input type="radio" name="q6" value="c"> c) It is only relevant to database management</label><br>
+                <label><input type="radio" name="q6" value="d"> d) It hinders the development process</label><br>
+              </div>
+            </div>
+
+            <!-- Add 4 more questions -->
+            <div class="question" data-question-index="6">
+              <p>7.  How does the principle of "Don't Repeat Yourself" (DRY) impact code development in 
+                     web development projects?</p>
+              <div class="options">
+                <label><input type="radio" name="q7" value="a"> a) It promotes redundancy in code</label><br>
+                <label><input type="radio" name="q7" value="b"> b) It encourages code duplication for better maintainability</label><br>
+                <label><input type="radio" name="q7" value="c"> c) It advocates for writing reusable code to avoid duplication</label><br>
+                <label><input type="radio" name="q7" value="d"> d)  It is not applicable to front-end development</label><br>
+              </div>
+            </div>
+
+            <div class="question" data-question-index="7">
+              <p>8. In the context of web development, what is the purpose of using a task runner like 
+                     Grunt or Gulp?</p>
+              <div class="options">
+                <label><input type="radio" name="q8" value="a"> a) To slow down the development process</label><br>
+                <label><input type="radio" name="q8" value="b"> b) o automate repetitive tasks such as minification and compilation</label><br>
+                <label><input type="radio" name="q8" value="c"> c) To increase the size of web files</label><br>
+                <label><input type="radio" name="q8" value="d"> d) To replace the need for version control systems</label><br>
+              </div>
+            </div>
+
+            <div class="question" data-question-index="8">
+              <p>9. How does the concept of "Git Flow" contribute to version control in web development projects?</p>
+              <div class="options">
+                <label><input type="radio" name="q9" value="a"> a) It discourages the use of branches in Git</label><br>
+                <label><input type="radio" name="q9" value="b"> b) It promotes a branching model for smoother collaboration and release management</label><br>
+                <label><input type="radio" name="q9" value="c"> c) It focuses solely on individual contributions</label><br>
+                <label><input type="radio" name="q9" value="d"> d) It is irrelevant to version control </label><br>
+              </div>
+            </div>
+
+            <div class="question" data-question-index="9">
+              <p>10. What is the significance of the "Single Responsibility Principle" in object-oriented 
+                     programming, especially in web development?</p>
+              <div class="options">
+                <label><input type="radio" name="q10" value="a"> a) It encourages each class to have multiple responsibilities</label><br>
+                <label><input type="radio" name="q10" value="b"> b) It promotes creating classes with a single, well-defined responsibility</label><br>
+                <label><input type="radio" name="q10" value="c"> c) It is only applicable to server-side programming</label><br>
+                <label><input type="radio" name="q10" value="d"> d) It suggests avoiding the use of classes</label><br>
+              </div>
+            </div>
+             <!--<h1>SECTION-3 Appreciation</h1> -->
+            
+          </div>
+          <div class="quiz-navigation">
+            <button class="btn btn-primary" onclick="prevQuestion()">Previous</button>
+          <button  class="btn btn-success"  id="qtn-submit" onclick="submitQuestion(1)">Submit</button> 
+            <button  id="next" class="btn btn-primary" onclick="nextQuestion()">Next</button>
+          </div><br/>
+		<a href="/submitte" class="btn btn-danger submit-btn w-100" onClick="submitTest()">Submit Test</a>
+        </form>
+        <div id="quizResult" class="result"></div>
+        <div id="quizGrade" class="grade"></div>
+      </div>
+    </div>
+    
+  </div>
+
+  <script>
+  window.addEventListener("DOMContentLoaded",()=>{
+	  openCam();
+	   //startTimer();
+    startQuestionTimer(); 
+	  
+
+    })
+  let currentQuestion = 0;
+  let totalQuestions = 10; // Set the total number of questions
+  let startTime = Date.now();
+  let testDuration = 10 * 60 * 1000; // 10 minutes for testing purposes
+  let endTime = startTime + testDuration;
+  let intervalId;
+  let questionStartTimes = []; // Array to store start times for each question
+  let questionDurations = [20, 30, 35, 25, 45, 40, 27, 44, 33, 47]; // Time duration for each question
+  let questionEndTime;
+  let remainingTime = 0; // Variable to store the remaining time
+  let questionRemainingTimes = []; // Array to store remaining time for each question
+  
+  document.addEventListener("visibilitychange",()=>{
+      if(document.hidden)
+      {
+      	exitPage();
+      }
+      else{
+          console.log("user is in this tab");
+      }
+  })
+
+  function submitQuestion()
+  {
+	  disableRadioButtons();
+      disableCurrentSubmitButton()
+      return;
+  }
+
+  function disableCurrentSubmitButton(){
+	  let submitButton = document.querySelector('#qtn-submit');
+	 
+	    submitButton.disabled = true;
+  }
+  
+  function startTimer() {
+    intervalId = setInterval(updateTimer, 1000); // Update every second
+  }
+
+   function startQuestionTimer() {
+    if (questionRemainingTimes[currentQuestion] === undefined) {
+        questionEndTime = Date.now() + questionDurations[currentQuestion] * 1000;
+    } else {
+        questionEndTime = Date.now() + questionRemainingTimes[currentQuestion] * 1000;
+    }
+    clearInterval(intervalId);
+    intervalId = setInterval(updateQuestionTimer, 1000);
+}
+
+  function updateTimer() {
+    let timeLeft = endTime - Date.now();
+    if (timeLeft <= 0) {
+      clearInterval(intervalId);
+      alert("Time's up!");
+      submitTest();
+      exitPage(); // Call exitPage function when time is up
+    }
+    const hours = Math.floor(timeLeft / (60 * 60 * 1000));
+    const minutes = Math.floor((timeLeft % (60 * 60 * 1000)) / (60 * 1000));
+    const seconds = Math.floor((timeLeft % (60 * 1000)) / 1000);
+    const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    document.getElementById("timer").textContent = formattedTime;
+  }
+
+  function updateQuestionTimer() {
+    let timeLeft = questionEndTime - Date.now();
+    if (timeLeft <= 0) {
+      clearInterval(intervalId);
+      document.getElementById("questionTimer").textContent = "Time Left: 0s";
+      disableRadioButtons();
+      disableSubmitButton()
+      return;
+    }
+    const seconds = Math.floor((timeLeft % (60 * 1000)) / 1000);
+    const formattedTime = `Time Left: ${seconds.toString().padStart(2, '0')}s`;
+    document.getElementById("questionTimer").textContent = formattedTime;
+  }
+  function disableSubmitButton() {
+	    let submitButton = document.querySelector('.submit-btn');
+	    console.log(submitButton)
+	    submitButton.disabled = true;
+	   
+	    
+	  }
+
+
+  function disableRadioButtons() {
+    let currentQuestionDiv = document.querySelector(`.question[data-question-index="${currentQuestion}"]`);
+    let radioButtons = currentQuestionDiv.querySelectorAll('input[type="radio"]');
+    radioButtons.forEach(radioButton => {
+      radioButton.disabled = true;
+    });
+  }
+  
+
+ function nextQuestion() {
+    if (currentQuestion < totalQuestions - 1) {
+        clearInterval(intervalId);
+        remainingTime = (questionEndTime - Date.now()) / 1000;
+        questionRemainingTimes[currentQuestion] = remainingTime; // Save remaining time for current question
+        currentQuestion++;
+        showQuestion();
+        startQuestionTimer();
+    } else {
+        showSubmitButton();
+    }
+}
+
+ 
+function prevQuestion() {
+    if (currentQuestion > 0) {
+        clearInterval(intervalId);
+        remainingTime = (questionEndTime - Date.now()) / 1000;
+        questionRemainingTimes[currentQuestion] = remainingTime; // Save remaining time for current question
+        currentQuestion--;
+        showQuestion();
+        if (questionRemainingTimes[currentQuestion] !== undefined) {
+            startQuestionTimer(); // Start timer with remaining time for previous question
+        } else {
+            startQuestionTimer();
+        }
+    }
+}
+
+function showQuestion() {
+    document.querySelectorAll('.question').forEach((question, index) => {
+      question.style.display = index === currentQuestion ? 'block' : 'none';
+    });
+   // hideSubmitButton();
+  }  
+
+  function showSubmitButton() {
+    document.querySelector('.submit-btn').style.display = 'block';
+    document.querySelector('.quiz-navigation').style.display = 'none';
+  }
+
+  function hideSubmitButton() {
+    document.querySelector('.submit-btn').style.display = 'none';
+    document.querySelector('.quiz-navigation').style.display = 'flex';
+  }
+  function submitTest() {
+	  let score1 = 0;
+	  let score2 = 0;
+	  let score3 = 0;
+	  let score4 = 0;
+
+	  // Add scoring logic for each question
+	  // Question 1
+	  var q1Answer = document.querySelector('input[name="q1"]:checked');
+
+  if (q1Answer && q1Answer.value === "b") {
+	 /*  localStorage.removeItem("ab2"); */
+    score1++;
+    let ab1 = [2.5,2.5,2,3]; // Create an array with specified values
+    localStorage.setItem("ab1", JSON.stringify(ab1));
+  } else {
+    const ab1 = new Array(4).fill(0); // Creates an array with a length of 4 and fills it with zeros
+    localStorage.setItem("ab1", JSON.stringify(ab1));
+  }
+
+      // Question 2
+      var q2Answer = document.querySelector('input[name="q2"]:checked');
+      if (q2Answer && q2Answer.value === "b") {
+        score1++;            
+        let ab2 = [1.5,3.5,2.5,2.5]; // Create an array with specified values
+        localStorage.setItem("ab2", JSON.stringify(ab2));
+      } else {
+        const ab2 = new Array(4).fill(0); // Creates an array with a length of 4 and fills it with zeros
+        localStorage.setItem("ab2", JSON.stringify(ab2));
+      }
+
+
+      // Question 3
+      var q3Answer = document.querySelector('input[name="q3"]:checked');
+      if (q3Answer && q3Answer.value === "b") {
+        score1++;
+        let ab3 = [1.5,3.5,2.5,2.5]; // Create an array with specified values
+        localStorage.setItem("ab3", JSON.stringify(ab3));
+      } else {
+        const ab3 = new Array(4).fill(0); // Creates an array with a length of 4 and fills it with zeros
+        localStorage.setItem("ab3", JSON.stringify(ab3));
+      }
+
+      // Question 4
+      var q4Answer = document.querySelector('input[name="q4"]:checked');
+      if (q4Answer && q4Answer.value === "c") {
+        score1++;
+        let ab4 = [2,3,2.5,2.5]; // Create an array with specified values
+        localStorage.setItem("ab4", JSON.stringify(ab4));
+      } else {
+        const ab4 = new Array(4).fill(0); // Creates an array with a length of 4 and fills it with zeros
+        localStorage.setItem("ab4", JSON.stringify(ab4));
+      }
+      
+
+      // Question 5
+      var q5Answer = document.querySelector('input[name="q5"]:checked');
+      if (q5Answer && q5Answer.value === "c") {
+        score1++;
+        let ab5 = [2, 1, 4, 2]; // Create an array with specified values
+        localStorage.setItem("ab5", JSON.stringify(ab5));
+      } else {
+        const ab5 = new Array(4).fill(0); // Creates an array with a length of 4 and fills it with zeros
+        localStorage.setItem("ab5", JSON.stringify(ab5));
+      }
+
+      // Question 6
+      var q6Answer = document.querySelector('input[name="q6"]:checked');
+      if (q6Answer && q6Answer.value === "b") {
+        score1++;
+        let ab6 = [2, 1, 4, 2]; // Create an array with specified values
+        localStorage.setItem("ab6", JSON.stringify(ab6));
+      } else {
+        const ab6 = new Array(4).fill(0); // Creates an array with a length of 4 and fills it with zeros
+        localStorage.setItem("ab6", JSON.stringify(ab6));
+      }
+      
+       
+      // Question 7
+      var q7Answer = document.querySelector('input[name="q7"]:checked');
+      if (q7Answer && q7Answer.value === "c") {
+        score1++;
+        let ab7 = [2, 1, 4, 2]; // Create an array with specified values
+        localStorage.setItem("ab7", JSON.stringify(ab7));
+      } else {
+        const ab7 = new Array(4).fill(0); // Creates an array with a length of 4 and fills it with zeros
+        localStorage.setItem("ab7", JSON.stringify(ab7));
+      }
+
+      // Question 8
+      var q8Answer = document.querySelector('input[name="q8"]:checked');
+      if (q8Answer && q8Answer.value === "b") {
+        score1++;
+        let ab8 = [2, 1, 4, 2]; // Create an array with specified values
+        localStorage.setItem("ab8", JSON.stringify(ab8));
+      } else {
+        const ab8 = new Array(4).fill(0); // Creates an array with a length of 4 and fills it with zeros
+        localStorage.setItem("ab8", JSON.stringify(ab8));
+      }
+
+      // Question 9
+      var q9Answer = document.querySelector('input[name="q9"]:checked');
+      if (q9Answer && q9Answer.value === "b") {
+        score1++;
+        let ab9 = [2, 1, 4, 2]; // Create an array with specified values
+        localStorage.setItem("ab9", JSON.stringify(ab9));
+      } else {
+        const ab9 = new Array(4).fill(0); // Creates an array with a length of 4 and fills it with zeros
+        localStorage.setItem("ab9", JSON.stringify(ab9));
+      }
+
+      // Question 10
+      var q10Answer = document.querySelector('input[name="q10"]:checked');
+      if (q10Answer && q10Answer.value === "b") {
+        score1++;
+        let ab10 = [2, 1, 4, 2]; // Create an array with specified values
+        localStorage.setItem("ab10", JSON.stringify(ab10));
+      } else {
+        const ab10 = new Array(4).fill(0); // Creates an array with a length of 4 and fills it with zeros
+        localStorage.setItem("ab10", JSON.stringify(ab10));
+      }
+      
+      
+
+      // Display the result
+     // var resultContainer = document.getElementById('quizResult');
+      
+      localStorage.setItem("score1",score1)
+      
+      // Display submission message
+      //alert("Test submitted successfully!");
+      exitPage()
+    }
+
+  function exitPage() {
+    window.location.replace("http://localhost:1234/submitte");
+  }
+
+
+function openCam(){
+    let All_mediaDevices=navigator.mediaDevices
+    if (!All_mediaDevices || !All_mediaDevices.getUserMedia) {
+       console.log("getUserMedia() not supported.");
+       return;
+    }
+    All_mediaDevices.getUserMedia({
+       audio: false,
+       video: false
+    })
+    .then(function(vidStream) {
+       var video = document.getElementById('videoCam');
+       if ("srcObject" in video) {
+          video.srcObject = vidStream;
+       } else {
+          video.src = window.URL.createObjectURL(vidStream);
+       }
+       video.onloadedmetadata = function(e) {
+          video.play();
+       };
+    })
+    .catch(function(e) {
+       console.log(e.name + ": " + e.message);
+    });
+ }
+
+    startTimer();
+    showQuestion();
+  </script>
+</body>
+</html>
